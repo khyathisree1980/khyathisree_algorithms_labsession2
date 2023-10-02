@@ -1,44 +1,31 @@
-package transaction;
-import java.util.*;
+package currency;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class DriverApp {
 
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		
-        int size;
-        Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the size of currency denominations");
+		int size=sc.nextInt();
+		
+		int currency []=new int[size];
+		System.out.println("Enter the currency denominations value");
+		for (int i = 0; i < currency.length; i++) {
+			currency[i]=sc.nextInt();
+			
+		}
+        System.out.println("Before sorting"+Arrays.toString(currency));
         
-        System.out.println("enter the size of transaction array");
-        size = sc.nextInt();
-        
-        System.out.println("enter the value of array");
-        int trans[] = new int[size];
-        for(int i = 0; i<trans.length; i++) {
-        	trans[i] = sc.nextInt();
-        }
-        
-        System.out.println("enter the total no of targets that needs to be achieved");
-        int targets = sc.nextInt();
-        
-        int sum,flag;
-        for(int j = 1; j <= targets;j++) {
-        	System.out.println("enter the value of target");
-        	int indTargets = sc.nextInt();
-        	flag = sum = 0;
-        	
-        	for(int k = 0; k < trans.length; k++) {
-        		sum = sum + trans[k];
-        		if(sum >= indTargets) {
-        			flag = 1;
-        			System.out.println("Target achieved after "+ (k+1)+ "transactions");
-        			break;
-        		}
-        	}
-        	if(flag==0) {
-        		System.out.println("Given target is not achieved");
-            }
-        }
-        sc.close();
+        MergeSort ms= new MergeSort();
+        ms.sort(currency, 0, size-1);
+        System.out.println("After sorting"+Arrays.toString(currency));
+        System.out.println("Enter the amount you want to pay");
+		int amount=sc.nextInt();
+		NoteCount nc=new NoteCount();
+		nc.counting(currency,amount);
 	}
 
 }
